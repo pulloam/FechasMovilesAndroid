@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/etNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -22,6 +22,19 @@
         android:ems="10"
         android:inputType="date"
         android:hint="Fecha nacimiento" />
+
+    <Spinner
+        android:id="@+id/spnNombres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <ListView
+        android:id="@+id/lstNombres"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#009688" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +56,5 @@
             android:layout_weight="1"
             android:text="Cancelar"
             android:layout_margin="2dp"/>
-
     </LinearLayout>
-
 </LinearLayout>

@@ -5,18 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private EditText etFecha;
     private Button btnAceptar;
+    private Spinner spnNombres;
+    private ListView lstNombres;
+ //   private ArrayList<String> losNombres = new ArrayList<>();
+    private String[] losNombres = new String[10];
+    private ArrayAdapter adaptador;
 
 
     @Override
@@ -26,11 +37,57 @@ public class MainActivity extends AppCompatActivity {
 
         etFecha = findViewById(R.id.etFecha);
         btnAceptar = findViewById(R.id.btnAceptar);
+        spnNombres = findViewById(R.id.spnNombres);
+        lstNombres = findViewById(R.id.lstNombres);
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int[] edad = calcularEdad(etFecha.getText().toString());
+            }
+        });
+
+        //Poblar el array
+        /*
+        losNombres[0] = "Seleccione nombre";
+        losNombres[1] = "Pepito";
+        losNombres[2] = "Maria";
+        losNombres[3] = "Luis";
+        */
+//        for(int x = 0; x < 10; ++x)
+//            losNombres[x] = "Nombre " + x;
+
+        adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, losNombres);
+        spnNombres.setAdapter(adaptador);
+        lstNombres.setAdapter(adaptador);
+
+        spnNombres.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("TAG_", "Posición del arreglo " + position );
+                Toast.makeText(MainActivity.this, "Seleccionó " + losNombres[position], Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        lstNombres.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("TAG_", "Posición del arreglo " + position );
+                Toast.makeText(MainActivity.this, "Seleccionó en ListView " + losNombres[position], Toast.LENGTH_LONG).show();
+            }
+        });
+
+        lstNombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("TAG_", "Posición del arreglo " + position );
+                Toast.makeText(MainActivity.this, "Seleccionó Long click en ListView " + losNombres[position], Toast.LENGTH_LONG).show();
+                return true;
             }
         });
 
